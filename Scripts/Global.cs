@@ -45,9 +45,9 @@ public class Global
 
 	public Global()
 	{
-		#if DEBUG
-		NowMapPath = "res://Assets/Game/Maps/TestMap.res";
-		#endif
+		//#if DEBUG
+		NowMapPath = "res://Assets/Game/Maps/Demo.res";
+		//#endif
 		PreLoadIndexTiles();
 		PreloadIndexEnemies();
 		PreLoadTileSet();

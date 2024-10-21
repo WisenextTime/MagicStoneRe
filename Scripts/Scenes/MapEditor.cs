@@ -19,6 +19,8 @@ public partial class MapEditor : Node2D
 	private VBoxContainer _items;
 	private Waves _waves;
 	private HSlider _zoom;
+
+	private Line2D _box;
 	//private Tree _itemTree;
 	//private TreeItem _rootItem;
 
@@ -36,6 +38,8 @@ public partial class MapEditor : Node2D
 		_waves = GetNode<Waves>("Ui/WaveEditor/UI/UI/Waves");
 		_item = ResourceLoader.Load<PackedScene>("res://Scenes/Prefabs/tree_item.tscn");
 		_zoom = GetNode<HSlider>("Ui/UiBase/TopBar/Zoom");
+		
+		_box = GetNode<Line2D>("Box");
 		//_itemTree = GetNode<Tree>("Ui/UiBase/Items/Tree");
 		Map = GameMap.OpenMap(GetGlobal.NowMapPath);
 		_camera.GlobalPosition = Map.Size * 16;
@@ -86,6 +90,11 @@ public partial class MapEditor : Node2D
 			if(tile.tile == "") continue;
 			_map.SetCell(pos,GetGlobal.TileIndex[tile.tile],Vector2I.Zero);
 		}
+		_box.ClearPoints();
+		_box.AddPoint(Vector2.Zero);
+		_box.AddPoint(Vector2.Right * Map.Size.X * 32);
+		_box.AddPoint(Map.Size * 32);
+		_box.AddPoint(Vector2.Down * Map.Size.Y * 32);
 	}
 
 	public void InfoButton(bool pressed)
@@ -163,6 +172,8 @@ public partial class MapEditor : Node2D
 				break;
 			
 			case InputEventMouseMotion motion:
+				GetNode<Line2D>("Select").GlobalPosition =
+					VariantOperation.ToGodotVector2I(GetGlobalMousePosition() / 32) * 32;
 				if (_mouseButtonRightPressed)
 				{
 					var tureRelative = _camera.GlobalPosition - motion.Relative / _camera.Zoom.X;
