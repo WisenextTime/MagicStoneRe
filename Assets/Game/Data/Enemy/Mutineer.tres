@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://cfbfom3ofu0wk"]
+
+[ext_resource type="Texture2D" uid="uid://cjsiyvgg5kebg" path="res://Assets/Game/Textures/Enemy/Mutineer.png" id="1_jbhf2"]
+[ext_resource type="Script" path="res://Scripts/Resources/Enemy.cs" id="1_yio8q"]
+
+[resource]
+script = ExtResource("1_yio8q")
+Id = "Mutineer"
+Texture = ExtResource("1_jbhf2")

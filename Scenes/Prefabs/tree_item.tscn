@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbsuf4j5153nn"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/TreeItem.cs" id="1_qf3k3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_we8ed"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_edb5b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0rwo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouf2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_phmtx"]
+
+[node name="TreeItem" type="Tree" groups=["TreeItem"]]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_we8ed")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_edb5b")
+theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_t0rwo")
+theme_override_styles/cursor = SubResource("StyleBoxEmpty_ouf2f")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_phmtx")
+columns = 3
+allow_search = false
+scroll_vertical_enabled = false
+script = ExtResource("1_qf3k3")
+
+[connection signal="button_clicked" from="." to="." method="Pressed"]
+[connection signal="item_collapsed" from="." to="." method="Fold"]

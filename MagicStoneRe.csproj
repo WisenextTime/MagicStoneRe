@@ -6,8 +6,73 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
     <Content Include="Assets\Fonts\SourceHanSansSC-Bold.otf" />
     <Content Include="Assets\Fonts\SourceHanSansSC-Bold.otf.import" />
+    <Content Include="Assets\Game\Data\Enemy\Mutineer.tres" />
+    <Content Include="Assets\Game\Data\Enemy\Shielder.tres" />
+    <Content Include="Assets\Game\Data\Tile\Core.res" />
+    <Content Include="Assets\Game\Data\Tile\Foundation.res" />
+    <Content Include="Assets\Game\Data\Tile\Portal.res" />
+    <Content Include="Assets\Game\Data\Tile\Road.res" />
+    <Content Include="Assets\Game\Textures\Enemy\Mutineer.png" />
+    <Content Include="Assets\Game\Textures\Enemy\Mutineer.png.import" />
+    <Content Include="Assets\Game\Textures\Enemy\Shielder.png" />
+    <Content Include="Assets\Game\Textures\Enemy\Shielder.png.import" />
+    <Content Include="Assets\Game\Textures\Tile\Core.png" />
+    <Content Include="Assets\Game\Textures\Tile\Core.png.import" />
+    <Content Include="Assets\Game\Textures\Tile\Foundation.png" />
+    <Content Include="Assets\Game\Textures\Tile\Foundation.png.import" />
+    <Content Include="Assets\Game\Textures\Tile\Portal.png" />
+    <Content Include="Assets\Game\Textures\Tile\Portal.png.import" />
+    <Content Include="Assets\Game\Textures\Tile\Road.png" />
+    <Content Include="Assets\Game\Textures\Tile\Road.png.import" />
+    <Content Include="Assets\Image\ButtonDelete.png" />
+    <Content Include="Assets\Image\ButtonDelete.png.import" />
+    <Content Include="Assets\Image\ButtonInfo.png" />
+    <Content Include="Assets\Image\ButtonInfo.png.import" />
+    <Content Include="Assets\Image\ButtonItem.png" />
+    <Content Include="Assets\Image\ButtonItem.png.import" />
+    <Content Include="Assets\Image\ButtonNew.png" />
+    <Content Include="Assets\Image\ButtonNew.png.import" />
+    <Content Include="Assets\Image\Erase.png" />
+    <Content Include="Assets\Image\Erase.png.import" />
+    <Content Include="Assets\Image\IconBuffer.png" />
+    <Content Include="Assets\Image\IconBuffer.png.import" />
+    <Content Include="Assets\Image\IconDestructible.png" />
+    <Content Include="Assets\Image\IconDestructible.png.import" />
+    <Content Include="Assets\Image\IconItem.png" />
+    <Content Include="Assets\Image\IconItem.png.import" />
+    <Content Include="Assets\Image\IconNone.png" />
+    <Content Include="Assets\Image\IconNone.png.import" />
+    <Content Include="Assets\Image\IconPortal.png" />
+    <Content Include="Assets\Image\IconPortal.png.import" />
+    <Content Include="Assets\Image\IconRoot.png" />
+    <Content Include="Assets\Image\IconRoot.png.import" />
+    <Content Include="Assets\Image\ItemDelete.png" />
+    <Content Include="Assets\Image\ItemDelete.png.import" />
+    <Content Include="Assets\Image\ItemEdit.png" />
+    <Content Include="Assets\Image\ItemEdit.png.import" />
+    <Content Include="Assets\Image\ItemNew.png" />
+    <Content Include="Assets\Image\ItemNew.png.import" />
+    <Content Include="Assets\Image\PreIndex\Foundation.png" />
+    <Content Include="Assets\Image\PreIndex\Foundation.png.import" />
+    <Content Include="Assets\Image\PreIndex\IconNone.png" />
+    <Content Include="Assets\Image\PreIndex\IconNone.png.import" />
+    <Content Include="Assets\Image\PreIndex\Road.png" />
+    <Content Include="Assets\Image\PreIndex\Road.png.import" />
+    <Content Include="Assets\Resources\TopBarButtons.tres" />
+    <Content Include="export_presets.cfg" />
     <Content Include="Scenes\Game.tscn" />
+    <Content Include="Scenes\map_editor.tscn" />
+    <Content Include="Scenes\Prefabs\tree_item.tscn" />
+    <Content Include="Scenes\Prefabs\wave.tscn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Game\Maps\" />
+    <Folder Include="Scripts\Core\" />
+    <Folder Include="Scripts\Mod\" />
+    <Folder Include="Scripts\Scenes\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,534 @@
+[gd_scene load_steps=18 format=3 uid="uid://dkfxwppl30bt5"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/MapEditor.cs" id="1_bbvm4"]
+[ext_resource type="Texture2D" uid="uid://cqsq7ifue0a7w" path="res://Assets/Image/ButtonInfo.png" id="2_m8sva"]
+[ext_resource type="ButtonGroup" uid="uid://uvbfbbsk06no" path="res://Assets/Resources/TopBarButtons.tres" id="2_vnn3b"]
+[ext_resource type="Texture2D" uid="uid://bs2a0jy5sjyk1" path="res://Assets/Image/Erase.png" id="3_5u1xi"]
+[ext_resource type="Texture2D" uid="uid://dqj06irryqxws" path="res://Assets/Image/ButtonItem.png" id="5_14fyu"]
+[ext_resource type="Texture2D" uid="uid://bk6qkw136tn0l" path="res://Assets/Image/ButtonNew.png" id="6_fa46h"]
+[ext_resource type="Texture2D" uid="uid://bkvhem32bwm3a" path="res://Assets/Image/IconItem.png" id="8_4qstg"]
+[ext_resource type="Texture2D" uid="uid://bwola4rnajl2g" path="res://Assets/Image/IconPortal.png" id="9_b6yip"]
+[ext_resource type="Texture2D" uid="uid://300b06j8font" path="res://Assets/Image/IconDestructible.png" id="10_ov2hn"]
+[ext_resource type="Texture2D" uid="uid://dd34jkkymb3vb" path="res://Assets/Image/IconBuffer.png" id="11_8tkhm"]
+[ext_resource type="Texture2D" uid="uid://cl2twl4ok5p1k" path="res://Assets/Image/IconNone.png" id="12_d34n8"]
+[ext_resource type="Script" path="res://Scripts/Scenes/BasicItemEdit.cs" id="12_wpx7i"]
+[ext_resource type="Script" path="res://Scripts/Scenes/Waves.cs" id="13_mm1ih"]
+[ext_resource type="Texture2D" uid="uid://hv33n4ju2atc" path="res://Assets/Image/ItemNew.png" id="13_mxh13"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sie52"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 0.54902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u703l"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 0.74902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pvbh"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.807843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="MapEditor" type="Node2D"]
+script = ExtResource("1_bbvm4")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Map" type="TileMapLayer" parent="."]
+
+[node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="UiBase" type="Control" parent="Ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBarBackground" type="ColorRect" parent="Ui/UiBase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+color = Color(0.0627451, 0.0627451, 0.0627451, 0.764706)
+
+[node name="TopBar" type="HBoxContainer" parent="Ui/UiBase"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="InfoButton" type="Button" parent="Ui/UiBase/TopBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vnn3b")
+icon = ExtResource("2_m8sva")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TileSelect" type="Button" parent="Ui/UiBase/TopBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vnn3b")
+icon = ExtResource("3_5u1xi")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button" type="Button" parent="Ui/UiBase/TopBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vnn3b")
+icon = ExtResource("5_14fyu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="InfoPanel" type="Panel" parent="Ui/UiBase"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = 30.0
+offset_top = 80.0
+offset_right = 500.0
+offset_bottom = 400.0
+
+[node name="MapNameLabel" type="Label" parent="Ui/UiBase/InfoPanel"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 30.0
+offset_right = 164.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 30
+text = "地图名称"
+
+[node name="MapName" type="LineEdit" parent="Ui/UiBase/InfoPanel"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 30.0
+offset_right = 450.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 30
+
+[node name="MapAuthorLabel" type="Label" parent="Ui/UiBase/InfoPanel"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 130.0
+offset_right = 164.0
+offset_bottom = 174.0
+theme_override_font_sizes/font_size = 30
+text = "作者"
+
+[node name="MapAuthor" type="LineEdit" parent="Ui/UiBase/InfoPanel"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 130.0
+offset_right = 450.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 30
+
+[node name="Resize" type="Button" parent="Ui/UiBase/InfoPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 230.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "重设地图尺寸"
+
+[node name="Tiles" type="ItemList" parent="Ui/UiBase"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 820.0
+offset_bottom = -10.0
+allow_reselect = true
+max_text_lines = 3
+auto_height = true
+item_count = 1
+max_columns = 10
+same_column_width = true
+fixed_column_width = 70
+icon_mode = 0
+icon_scale = 2.0
+item_0/text = "擦除"
+item_0/icon = ExtResource("3_5u1xi")
+
+[node name="Items" type="Panel" parent="Ui/UiBase"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 520.0
+grow_vertical = 2
+
+[node name="Tree" type="ScrollContainer" parent="Ui/UiBase/Items"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Items" type="VBoxContainer" parent="Ui/UiBase/Items/Tree"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemNew" type="Button" parent="Ui/UiBase/Items"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+text = "新建"
+icon = ExtResource("6_fa46h")
+expand_icon = true
+
+[node name="ItemEdit" type="Window" parent="Ui"]
+mode = 2
+title = "编辑物体"
+initial_position = 1
+size = Vector2i(500, 300)
+visible = false
+transient = true
+extend_to_title = true
+keep_title_visible = true
+script = ExtResource("12_wpx7i")
+
+[node name="UI" type="Control" parent="Ui/ItemEdit"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="ScrollContainer" parent="Ui/ItemEdit/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="Ui/ItemEdit/UI/UI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Texture" type="Button" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+text = "物体图像"
+icon = ExtResource("12_d34n8")
+expand_icon = true
+
+[node name="Pos" type="HSplitContainer" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+split_offset = 240
+dragger_visibility = 1
+
+[node name="X" type="HSplitContainer" parent="Ui/ItemEdit/UI/UI/Box/Pos"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Ui/ItemEdit/UI/UI/Box/Pos/X"]
+layout_mode = 2
+text = "X"
+
+[node name="Value" type="SpinBox" parent="Ui/ItemEdit/UI/UI/Box/Pos/X"]
+layout_mode = 2
+
+[node name="Y" type="HSplitContainer" parent="Ui/ItemEdit/UI/UI/Box/Pos"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Ui/ItemEdit/UI/UI/Box/Pos/Y"]
+layout_mode = 2
+text = "Y"
+
+[node name="Value" type="SpinBox" parent="Ui/ItemEdit/UI/UI/Box/Pos/Y"]
+layout_mode = 2
+
+[node name="Lightable" type="CheckBox" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+text = "可发光"
+
+[node name="LightColor" type="ColorPicker" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+alignment = 1
+edit_alpha = false
+picker_shape = 4
+presets_visible = false
+
+[node name="LightTexture" type="Button" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+text = "灯光图像"
+icon = ExtResource("12_d34n8")
+
+[node name="LightIntensity" type="HSplitContainer" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Ui/ItemEdit/UI/UI/Box/LightIntensity"]
+layout_mode = 2
+text = "灯光强度"
+
+[node name="Value" type="SpinBox" parent="Ui/ItemEdit/UI/UI/Box/LightIntensity"]
+layout_mode = 2
+rounded = true
+allow_greater = true
+
+[node name="LightRange" type="HSplitContainer" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Ui/ItemEdit/UI/UI/Box/LightRange"]
+layout_mode = 2
+text = "灯光范围"
+
+[node name="Value" type="SpinBox" parent="Ui/ItemEdit/UI/UI/Box/LightRange"]
+layout_mode = 2
+rounded = true
+allow_greater = true
+
+[node name="ChangeType" type="Button" parent="Ui/ItemEdit/UI/UI/Box"]
+layout_mode = 2
+text = "更改类型"
+icon = ExtResource("8_4qstg")
+
+[node name="OK" type="Button" parent="Ui/ItemEdit/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "确定"
+
+[node name="ResizePopup" type="PopupPanel" parent="Ui"]
+transparent_bg = true
+title = "重设地图大小"
+initial_position = 1
+size = Vector2i(500, 300)
+unresizable = false
+borderless = false
+always_on_top = true
+transparent = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_sie52")
+
+[node name="UI" type="Control" parent="Ui/ResizePopup"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 498.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="XLabel" type="Label" parent="Ui/ResizePopup/UI"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 69.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 30
+text = "X:"
+
+[node name="YLabel" type="Label" parent="Ui/ResizePopup/UI"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 75.0
+offset_right = 66.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 30
+text = "Y:"
+
+[node name="X" type="LineEdit" parent="Ui/ResizePopup/UI"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 35.0
+offset_right = 156.25
+offset_bottom = 73.0
+theme_override_font_sizes/font_size = 20
+text = "10"
+virtual_keyboard_type = 2
+
+[node name="Y" type="LineEdit" parent="Ui/ResizePopup/UI"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 156.25
+offset_bottom = 118.0
+theme_override_font_sizes/font_size = 20
+text = "10"
+virtual_keyboard_type = 2
+
+[node name="Warn" type="Label" parent="Ui/ResizePopup/UI"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 470.0
+offset_bottom = 211.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "如果新尺寸小于原尺寸将裁剪地图
+并且只保留左上角"
+
+[node name="Resize" type="Button" parent="Ui/ResizePopup/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -52.0
+offset_right = 34.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "确定"
+
+[node name="NewItemPopup" type="PopupMenu" parent="Ui"]
+title = "选择物体类型"
+initial_position = 1
+size = Vector2i(500, 300)
+unresizable = false
+borderless = false
+always_on_top = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_u703l")
+item_count = 4
+item_0/text = "基础物体"
+item_0/icon = ExtResource("8_4qstg")
+item_1/text = "敌人"
+item_1/icon = ExtResource("9_b6yip")
+item_1/id = 1
+item_2/text = "可破坏物"
+item_2/icon = ExtResource("10_ov2hn")
+item_2/id = 2
+item_3/text = "状态器"
+item_3/icon = ExtResource("11_8tkhm")
+item_3/id = 3
+item_3/disabled = true
+
+[node name="OpenIndexImage" type="FileDialog" parent="Ui"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(500, 300)
+ok_button_text = "Open"
+cancel_button_text = "取消"
+file_mode = 0
+root_subfolder = "res://Assets/Image/PreIndex/"
+filters = PackedStringArray("*.png,*.res,*.tres;图片文件")
+
+[node name="OpenCustomImage" type="FileDialog" parent="Ui"]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 2
+size = Vector2i(500, 300)
+ok_button_text = "Open"
+cancel_button_text = "取消"
+file_mode = 0
+access = 2
+root_subfolder = "/"
+filters = PackedStringArray("*.png,*.res,*.tres;图片文件")
+
+[node name="OpenImageSelect" type="PopupMenu" parent="Ui"]
+title = " 选择图像位置"
+initial_position = 1
+size = Vector2i(150, 100)
+unresizable = false
+borderless = false
+always_on_top = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_8pvbh")
+item_count = 2
+item_0/text = "内置预设"
+item_1/text = "外部图片"
+item_1/id = 1
+
+[node name="WaveEditor" type="Window" parent="Ui"]
+title = "波次编辑器(第10波)"
+initial_position = 1
+size = Vector2i(500, 300)
+
+[node name="UI" type="Control" parent="Ui/WaveEditor"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="ScrollContainer" parent="Ui/WaveEditor/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Waves" type="VBoxContainer" parent="Ui/WaveEditor/UI/UI"]
+layout_mode = 2
+script = ExtResource("13_mm1ih")
+
+[node name="Buttons" type="HBoxContainer" parent="Ui/WaveEditor/UI/UI/Waves"]
+layout_mode = 2
+
+[node name="New" type="Button" parent="Ui/WaveEditor/UI/UI/Waves/Buttons"]
+layout_mode = 2
+icon = ExtResource("13_mxh13")
+
+[connection signal="toggled" from="Ui/UiBase/TopBar/InfoButton" to="." method="InfoButton"]
+[connection signal="toggled" from="Ui/UiBase/TopBar/TileSelect" to="." method="TileSelect"]
+[connection signal="toggled" from="Ui/UiBase/TopBar/Button" to="." method="ButtonItem"]
+[connection signal="pressed" from="Ui/UiBase/InfoPanel/Resize" to="." method="ResizeMapPopup"]
+[connection signal="item_selected" from="Ui/UiBase/Tiles" to="." method="TileSelectSuccess"]
+[connection signal="pressed" from="Ui/UiBase/Items/ItemNew" to="." method="NewItem"]
+[connection signal="close_requested" from="Ui/ItemEdit" to="Ui/ItemEdit" method="hide"]
+[connection signal="visibility_changed" from="Ui/ItemEdit" to="Ui/ItemEdit" method="ReadyToPop"]
+[connection signal="pressed" from="Ui/ItemEdit/UI/UI/Box/Texture" to="Ui/ItemEdit" method="ChangeTexture"]
+[connection signal="toggled" from="Ui/ItemEdit/UI/UI/Box/Lightable" to="Ui/ItemEdit" method="LightChange"]
+[connection signal="pressed" from="Ui/ItemEdit/UI/UI/Box/LightTexture" to="Ui/ItemEdit" method="ChangeLightTexture"]
+[connection signal="pressed" from="Ui/ItemEdit/UI/UI/Box/ChangeType" to="Ui/ItemEdit" method="ChangeType"]
+[connection signal="pressed" from="Ui/ItemEdit/UI/OK" to="Ui/ItemEdit" method="SaveChanges"]
+[connection signal="pressed" from="Ui/ResizePopup/UI/Resize" to="." method="ResizeMap"]
+[connection signal="index_pressed" from="Ui/NewItemPopup" to="." method="NewItemOk"]
+[connection signal="index_pressed" from="Ui/NewItemPopup" to="Ui/ItemEdit" method="SetType"]
+[connection signal="file_selected" from="Ui/OpenIndexImage" to="Ui/ItemEdit" method="SelectImage"]
+[connection signal="file_selected" from="Ui/OpenCustomImage" to="Ui/ItemEdit" method="SelectImage"]
+[connection signal="index_pressed" from="Ui/OpenImageSelect" to="Ui/ItemEdit" method="SourceSelect"]

@@ -12,14 +12,14 @@ config_version=5
 
 config/name="MagicStoneRe"
 config/version="1.0"
+run/main_scene="res://Scenes/map_editor.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Icon.png"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
-window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=4
 
@@ -35,12 +35,23 @@ folder_colors={
 "res://Scripts/": "purple"
 }
 
+[global_group]
+
+TreeItem=""
+
 [gui]
 
 theme/custom_font="res://Assets/Fonts/SourceHanSansSC-Bold.otf"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+pointing/android/enable_long_press_as_right_click=true
+pointing/android/enable_pan_and_scale_gestures=true
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.185981, 0.185981, 0.185981, 1)
 viewport/hdr_2d=true
