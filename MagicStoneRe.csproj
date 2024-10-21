@@ -10,9 +10,9 @@
     <Content Include=".gitignore" />
     <Content Include="Assets\Fonts\SourceHanSansSC-Bold.otf" />
     <Content Include="Assets\Fonts\SourceHanSansSC-Bold.otf.import" />
-    <Content Include="Assets\Game\Data\Enemy\Mutineer.tres" />
-    <Content Include="Assets\Game\Data\Enemy\Shielder.tres" />
-    <Content Include="Assets\Game\Data\Tile\Core.res" />
+    <Content Include="Assets\Game\Data\Enemy\Mutineer.res" />
+    <Content Include="Assets\Game\Data\Enemy\Shielder.res" />
+    <Content Include="Assets\Game\Data\Tile\AlphaCore.res" />
     <Content Include="Assets\Game\Data\Tile\Foundation.res" />
     <Content Include="Assets\Game\Data\Tile\Portal.res" />
     <Content Include="Assets\Game\Data\Tile\Road.res" />
@@ -63,6 +63,10 @@
     <Content Include="Assets\Image\PreIndex\Road.png" />
     <Content Include="Assets\Image\PreIndex\Road.png.import" />
     <Content Include="Assets\Resources\TopBarButtons.tres" />
+    <Content Include="Assets\Transaction.csv" />
+    <Content Include="Assets\Transaction.csv.import" />
+    <Content Include="Assets\Transaction.en.translation" />
+    <Content Include="Assets\Transaction.zh.translation" />
     <Content Include="export_presets.cfg" />
     <Content Include="Scenes\Game.tscn" />
     <Content Include="Scenes\map_editor.tscn" />
