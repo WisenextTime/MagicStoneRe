@@ -35,11 +35,13 @@ public class Global
 	public string NowMapPath;
 	
 	public List<Tile> Tiles = new();
+	public List<Enemy> Enemies = new();
 	public TileSet TileSet = new()
 	{
 		TileSize = Vector2I.One * 32
 	};
 	public Dictionary<string,int> TileIndex = new();
+	public Dictionary<string,int> EnemyIndex = new();
 
 	public Global()
 	{
@@ -47,6 +49,7 @@ public class Global
 		NowMapPath = "res://Assets/Game/Maps/TestMap.res";
 		#endif
 		PreLoadIndexTiles();
+		PreloadIndexEnemies();
 		PreLoadTileSet();
 	}
 
@@ -68,6 +71,15 @@ public class Global
 		foreach (var tile in DirAccess.GetFilesAt("res://Assets/Game/Data/Tile/"))
 		{
 			Tiles.Add(ResourceLoader.Load<Tile>($"res://Assets/Game/Data/Tile/{tile}"));
+		}
+	}
+
+	private void PreloadIndexEnemies()
+	{
+		foreach (var enemy in DirAccess.GetFilesAt("res://Assets/Game/Data/Enemy/"))
+		{
+			Enemies.Add(ResourceLoader.Load<Enemy>($"res://Assets/Game/Data/Enemy/{enemy}"));
+			EnemyIndex.Add(Enemies[^1].Id,Enemies.Count - 1);
 		}
 	}
 }

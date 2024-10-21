@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkfxwppl30bt5"]
+[gd_scene load_steps=19 format=3 uid="uid://dkfxwppl30bt5"]
 
 [ext_resource type="Script" path="res://Scripts/Scenes/MapEditor.cs" id="1_bbvm4"]
 [ext_resource type="Texture2D" uid="uid://cqsq7ifue0a7w" path="res://Assets/Image/ButtonInfo.png" id="2_m8sva"]
 [ext_resource type="ButtonGroup" uid="uid://uvbfbbsk06no" path="res://Assets/Resources/TopBarButtons.tres" id="2_vnn3b"]
 [ext_resource type="Texture2D" uid="uid://bs2a0jy5sjyk1" path="res://Assets/Image/Erase.png" id="3_5u1xi"]
 [ext_resource type="Texture2D" uid="uid://dqj06irryqxws" path="res://Assets/Image/ButtonItem.png" id="5_14fyu"]
+[ext_resource type="Texture2D" uid="uid://csivevlxxbsl" path="res://Assets/Game/Textures/Enemy/ButtonSave.png" id="6_8s44i"]
 [ext_resource type="Texture2D" uid="uid://bk6qkw136tn0l" path="res://Assets/Image/ButtonNew.png" id="6_fa46h"]
 [ext_resource type="Texture2D" uid="uid://bkvhem32bwm3a" path="res://Assets/Image/IconItem.png" id="8_4qstg"]
 [ext_resource type="Texture2D" uid="uid://bwola4rnajl2g" path="res://Assets/Image/IconPortal.png" id="9_b6yip"]
@@ -71,6 +72,14 @@ offset_bottom = 80.0
 grow_horizontal = 2
 alignment = 1
 
+[node name="Zoom" type="HSlider" parent="Ui/UiBase/TopBar"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -3.0
+max_value = 2.0
+step = 0.1
+
 [node name="InfoButton" type="Button" parent="Ui/UiBase/TopBar"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
@@ -89,12 +98,21 @@ icon = ExtResource("3_5u1xi")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button" type="Button" parent="Ui/UiBase/TopBar"]
+[node name="Item" type="Button" parent="Ui/UiBase/TopBar"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 toggle_mode = true
 button_group = ExtResource("2_vnn3b")
 icon = ExtResource("5_14fyu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Save" type="Button" parent="Ui/UiBase/TopBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vnn3b")
+icon = ExtResource("6_8s44i")
 icon_alignment = 1
 expand_icon = true
 
@@ -481,6 +499,7 @@ item_1/id = 1
 title = "波次编辑器(第10波)"
 initial_position = 1
 size = Vector2i(500, 300)
+visible = false
 
 [node name="UI" type="Control" parent="Ui/WaveEditor"]
 layout_mode = 3
@@ -513,9 +532,17 @@ layout_mode = 2
 layout_mode = 2
 icon = ExtResource("13_mxh13")
 
+[node name="SaveSuccess" type="AcceptDialog" parent="Ui"]
+title = "保存成功"
+initial_position = 1
+size = Vector2i(200, 100)
+ok_button_text = "确定"
+
+[connection signal="value_changed" from="Ui/UiBase/TopBar/Zoom" to="." method="Zoom"]
 [connection signal="toggled" from="Ui/UiBase/TopBar/InfoButton" to="." method="InfoButton"]
 [connection signal="toggled" from="Ui/UiBase/TopBar/TileSelect" to="." method="TileSelect"]
-[connection signal="toggled" from="Ui/UiBase/TopBar/Button" to="." method="ButtonItem"]
+[connection signal="toggled" from="Ui/UiBase/TopBar/Item" to="." method="ButtonItem"]
+[connection signal="toggled" from="Ui/UiBase/TopBar/Save" to="." method="ButtonSave"]
 [connection signal="pressed" from="Ui/UiBase/InfoPanel/Resize" to="." method="ResizeMapPopup"]
 [connection signal="item_selected" from="Ui/UiBase/Tiles" to="." method="TileSelectSuccess"]
 [connection signal="pressed" from="Ui/UiBase/Items/ItemNew" to="." method="NewItem"]
@@ -532,3 +559,5 @@ icon = ExtResource("13_mxh13")
 [connection signal="file_selected" from="Ui/OpenIndexImage" to="Ui/ItemEdit" method="SelectImage"]
 [connection signal="file_selected" from="Ui/OpenCustomImage" to="Ui/ItemEdit" method="SelectImage"]
 [connection signal="index_pressed" from="Ui/OpenImageSelect" to="Ui/ItemEdit" method="SourceSelect"]
+[connection signal="close_requested" from="Ui/WaveEditor" to="Ui/WaveEditor/UI/UI/Waves" method="Close"]
+[connection signal="pressed" from="Ui/WaveEditor/UI/UI/Waves/Buttons/New" to="Ui/WaveEditor/UI/UI/Waves" method="NewWave"]

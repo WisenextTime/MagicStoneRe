@@ -38,6 +38,7 @@ folder_colors={
 [global_group]
 
 TreeItem=""
+Wave=""
 
 [gui]
 
@@ -48,6 +49,10 @@ theme/custom_font="res://Assets/Fonts/SourceHanSansSC-Bold.otf"
 pointing/emulate_touch_from_mouse=true
 pointing/android/enable_long_press_as_right_click=true
 pointing/android/enable_pan_and_scale_gestures=true
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Assets/Transaction.en.translation", "res://Assets/Transaction.zh.translation")
 
 [rendering]
 

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 using MagicStoneRe.Scripts.Resources;
 using MagicStoneRe.Scripts.Services;
 using Buffer = MagicStoneRe.Scripts.Resources.Buffer;
@@ -16,6 +17,8 @@ public partial class MapEditor : Node2D
 	private Button _tileSelect;
 	private Camera2D _camera;
 	private VBoxContainer _items;
+	private Waves _waves;
+	private HSlider _zoom;
 	//private Tree _itemTree;
 	//private TreeItem _rootItem;
 
@@ -30,7 +33,9 @@ public partial class MapEditor : Node2D
 		_tileSelect = GetNode<Button>("Ui/UiBase/TopBar/TileSelect");
 		_camera = GetNode<Camera2D>("Camera");
 		_items = GetNode<VBoxContainer>("Ui/UiBase/Items/Tree/Items");
+		_waves = GetNode<Waves>("Ui/WaveEditor/UI/UI/Waves");
 		_item = ResourceLoader.Load<PackedScene>("res://Scenes/Prefabs/tree_item.tscn");
+		_zoom = GetNode<HSlider>("Ui/UiBase/TopBar/Zoom");
 		//_itemTree = GetNode<Tree>("Ui/UiBase/Items/Tree");
 		Map = GameMap.OpenMap(GetGlobal.NowMapPath);
 		_camera.GlobalPosition = Map.Size * 16;
@@ -50,7 +55,7 @@ public partial class MapEditor : Node2D
 		//_rootItem.SetText(0,"物体");
 		foreach (var item in Map.Items.Select((item, index) => new { item, index }))
 		{
-			NewTreeItem(item.item.Type,item.index);
+			NewTreeItem((ItemType)item.item.Type,item.index);
 		}
 	}
 
@@ -68,7 +73,7 @@ public partial class MapEditor : Node2D
 	{
 		foreach (var tile in GetGlobal.Tiles)
 		{
-			_tileList.AddItem(tile.Id, tile.Texture);
+			_tileList.AddItem(Tr($"{tile.Id}_Name"), tile.Texture);
 		}
 	}
 
@@ -133,7 +138,7 @@ public partial class MapEditor : Node2D
 			GetGlobal.Tiles[index-1].Texture;
 	}
 
-	public override void _Input(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		switch (@event)
 		{
@@ -148,7 +153,12 @@ public partial class MapEditor : Node2D
 					case MouseButton.Right:
 						_mouseButtonRightPressed = button.Pressed;
 						break;
-					
+					case MouseButton.WheelUp:
+						_zoom.Value += 0.1;
+						break;
+					case MouseButton.WheelDown:
+						_zoom.Value -= 0.1;
+						break;
 				}
 				break;
 			
@@ -251,4 +261,22 @@ public partial class MapEditor : Node2D
 		Map.Items.Remove();
 		ReloadTree();
 	}*/
+	public void EditWave(Item item, int id)
+	{
+		var portal = (Portal)item;
+		var data = portal.Waves;
+		_waves.EditWave(data[id],id);
+	}
+
+	public void ButtonSave(bool pressed)
+	{
+		if (!pressed) return;
+		ResourceSaver.Save(Map, GetGlobal.NowMapPath);
+		GetNode<AcceptDialog>("Ui/SaveSuccess").Popup();
+	}
+
+	public void Zoom(double zoom)
+	{
+		_camera.Zoom = Vector2.One * (float)Math.Pow(2, zoom);
+	}
 }

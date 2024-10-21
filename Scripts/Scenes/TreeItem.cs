@@ -37,15 +37,22 @@ public partial class TreeItem : Tree
 		_root.SetText(1, $"{Item.Position.X}, {Item.Position.Y}");
 		_root.AddButton(2,IconTexture.Edit,0,false,"编辑");
 		_root.AddButton(2,IconTexture.Delete,1,false,"删除");
-		if(Type == ItemType.Portal)
+		if (Type != ItemType.Portal) return;
+		LoadWaves();
+	}
+
+	private void LoadWaves()
+	{
+		foreach (var wave in _items)
 		{
-			_root.AddButton(2, IconTexture.New, 2, false, "新建波次");
-			var index = 0;
-			foreach (var wave in (Array)Item.Data["Waves"])
-			{
-				NewWave(index);
-				index++;
-			}
+			wave.Key.Free();
+		}
+		_items.Clear();
+		_root.AddButton(2, IconTexture.New, 2, false, "新建波次");
+		var portal =(Portal)Item;
+		for (var index = 0; index < (portal.Waves).Count; index++)
+		{
+			NewWave(index);
 		}
 	}
 
@@ -64,14 +71,28 @@ public partial class TreeItem : Tree
 					break;
 				case 2:
 					NewWave(_items.Count);
-					var waves = (Array)Item.Data["Waves"];
-					waves.Add(new Dictionary<string, int>());
+					var portal = (Portal)Item;
+					var waves = portal.Waves;
+					waves.Add(new WavesContain());
 					break;
 			}
 		}
 		else
 		{
-			
+			switch (id%2)
+			{
+				case 0:
+					var portal = (Portal)Item;
+					var waves = portal.Waves;
+					waves.RemoveAt((id-4)/2);
+					Editor.ReloadTree();
+					//GD.Print((id-4)/2);
+					break;
+				case 1:
+					Editor.EditWave(Item, (id-3)/2);
+					//GD.Print((id-3)/2);
+					break;
+			}
 		}
 	}
 

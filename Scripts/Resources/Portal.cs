@@ -6,9 +6,10 @@ namespace MagicStoneRe.Scripts.Resources;
 
 public partial class Portal : Item
 {
+	[Export]public Array<WavesContain> Waves = new();
 	public Portal()
 	{
-		Type = ItemType.Portal;
-		Data.Add("Waves", new Array<Dictionary<string, int>>());
+		Type = (int)ItemType.Portal;
+		//Data.Add("Waves", new Array<PortalWave>());
 	}
 }

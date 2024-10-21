@@ -94,18 +94,8 @@ public partial class BasicItemEdit : Window
 		Item.Lightable = _lightable.ButtonPressed;
 		Item.LightRange = (int)_lightRange.Value;
 		Item.LightIntensity = (int)_lightIntensity.Value;
-		Item.Type = _itemType;
-		switch (_itemType)
-		{
-			case ItemType.Portal:
-				if (!Item.Data.ContainsKey("Waves")) Item.Data.Add("Waves", new Dictionary<string, int>());
-				break;
-			case ItemType.Destructible:
-				if(!Item.Data.ContainsKey("Hp")) Item.Data.Add("Hp", 0);
-				if(!Item.Data.ContainsKey("CanBeAttackedDirectly")) Item.Data.Add("CanBeAttackedDirectly", false);
-				if(!Item.Data.ContainsKey("Coin")) Item.Data.Add("Coin", 0);
-				break;
-		}
+		Item.Type = (int)_itemType;
+		
 		Hide();
 		_editor.ReloadTree();
 	}

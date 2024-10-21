@@ -5,11 +5,12 @@ namespace MagicStoneRe.Scripts.Resources;
 
 public partial class Destructible : Item
 {
+
+	[Export] public int Hp = 0;
+	[Export] public bool CanBeDestroyed = false;
+	[Export] public int Coin = 0;
 	public Destructible()
 	{
-		Type = ItemType.Destructible;
-		Data.Add("Hp", 0);
-		Data.Add("CanBeAttackedDirectly", false);
-		Data.Add("Coin", 0);
+		Type = (int)ItemType.Destructible;
 	}
 }

@@ -5,11 +5,15 @@ namespace MagicStoneRe.Scripts.Resources;
 public partial class Buffer : Item
 {
 	//TODO Buffer
+	[Export] public string Buff = "";
+	[Export] public float Range = 0;
+	[Export] public string Scoping = "";
+	
 	public Buffer()
 	{
-		Type = ItemType.Buffer;
-		Data.Add("Buff", "none");
-		Data.Add("Range", 0);
-		Data.Add("Scoping","None");
+		Type = (int)ItemType.Buffer;
+		//Data.Add("Buff", "none");
+		//Data.Add("Range", 0);
+		//Data.Add("Scoping","None");
 	}
 }
